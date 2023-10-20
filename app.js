@@ -7,7 +7,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    res.send('You can post to this endpoint!');
+    res.send('You can post to this endpoint.');
 });
 
 app.listen(3000, () => console.log(`Running on PORT ${PORT}`));
