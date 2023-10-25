@@ -126,6 +126,11 @@ const deleteUser = (req, res) => {
         message: 'This route is not yet defined'
     });
 };
+const tourRouter = express.Router();
+const userRouter = express.Router();
+
+app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/users', userRouter);
 
 app.post('/api/v1/tours', createTour);
 app.get('/api/v1/tours/:id', getTour);
