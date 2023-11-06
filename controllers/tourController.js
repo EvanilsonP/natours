@@ -26,6 +26,14 @@ exports.getAllTours = async (req, res) => {
       query = query.sort('createdAt');
     };
 
+    // Field limiting
+    if(req.query.fields) {
+      const fields = req.query.fields.split(',').join('');
+      query = query.select(fields);
+    } else {
+      query = query.select('-__v');
+    };
+ 
     // Filtering data
     // const tours = await Tour.find().where('duration').equals(5).where('difficulty').equals('easy');
 
