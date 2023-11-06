@@ -9,12 +9,22 @@ exports.getAllTours = async (req, res) => {
     excludedFields.forEach(el => delete queryObj[el]);
 
     // Filtering data
-    const query = Tour.find(queryObj);
+    // const query = Tour.find(queryObj);
 
     // Advanced filtering
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/b(gte|gt|lte|lt)\b/g, match => `$${match}`);
     console.log(JSON.parse(queryStr));
+
+    let query = Tour.find(JSON.parse(queryStr));
+
+    // Sorting
+    if (req.query.sort) {
+      const sortBy = query.sort(req.query.sort.split(',').join(''));
+      console.log(sortBy);
+    } else {
+      query = query.sort('createdAt');
+    };
 
     // Filtering data
     // const tours = await Tour.find().where('duration').equals(5).where('difficulty').equals('easy');
